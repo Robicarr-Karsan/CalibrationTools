@@ -6,13 +6,13 @@
 
   <arg name="camera_name"/>
 
-  <let name="image_topic" value="/sensing/camera/$(var camera_name)/image_raw"/>
+  <let name="image_topic" value="/lucid_vision/camera_0/image"/>
   <let name="image_topic" value="/sensing/camera/traffic_light/image_raw" if="$(eval &quot;'$(var camera_name)' == 'traffic_light_left_camera' &quot;)"/>
 
-  <let name="image_compressed_topic" value="/sensing/camera/$(var camera_name)/image_raw/compressed"/>
+  <let name="image_compressed_topic" value="/lucid_vision/camera_0/image"/>
   <let name="image_compressed_topic" value="/sensing/camera/traffic_light/image_raw/compressed" if="$(eval &quot;'$(var camera_name)' == 'traffic_light_left_camera' &quot;)"/>
 
-  <let name="camera_info_topic" value="/sensing/camera/$(var camera_name)/camera_info"/>
+  <let name="camera_info_topic" value="/lucid_vision/camera_0/camera_info"/>
   <let name="camera_info_topic" value="/sensing/camera/traffic_light/camera_info" if="$(eval &quot;'$(var camera_name)' == 'traffic_light_left_camera' &quot;)"/>
 
   <let name="pointcloud_topic" value="/sensing/lidar/top/pointcloud_raw_ex" if="$(eval &quot;'$(var camera_name)' == 'camera0' &quot;)"/>
@@ -66,7 +66,7 @@
       <remap from="image" to="$(var image_compressed_topic)"/>
       <remap from="camera_info" to="$(var camera_info_topic)"/>
       <remap from="calibration_points_input" to="calibration_points"/>
-
+      <param name="use_compressed" value="false"/>
       <param name="camera_parent_frame" value="$(var parent_frame)"/>
       <param name="camera_frame" value="$(var camera_frame)"/>
     </node>
